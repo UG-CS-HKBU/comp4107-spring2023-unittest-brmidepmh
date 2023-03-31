@@ -30,8 +30,11 @@ class UnitTest {
 
     @Test
     fun testBeingAttacked() {
+        for (i in 1..7) {
+            heroes.add(NoneMonarchFactory.createRandomHero())
+        }
         for (hero in heroes) {
-            val spy = object : Hero(MinisterRole()) {
+            val spy = object : Hero(NoneMonarchFactory.getRandomRole()) {
                 override val name = hero.name
                 override fun beingAttacked() {
                     hero.beingAttacked()
@@ -70,8 +73,7 @@ class UnitTest {
 
     object FakeMonarchFactory : GameObjectFactory{
         override fun createRandomHero() : Hero {
-            monarchHero = CaoCao()
-            return monarchHero as CaoCao
+            return CaoCao()
         }
         override fun getRandomRole(): Role {
             return MonarchRole()
